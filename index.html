@@ -1,16 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>VoxelCraft</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoxelCraft</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Import map tells the browser where Three.js comes from -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.179.1/build/three.module.js"
+  }
+}
+</script>
+
 </head>
 
 <body>
-    <div id="info">
-        Click to play
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/three@0.160/build/three.min.js"></script>
-    <script src="main.js"></script>
+<div id="loading">
+Loading VoxelCraft...
+</div>
+
+<script type="module" src="main.js"></script>
+
 </body>
 </html>

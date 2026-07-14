@@ -1,83 +1,62 @@
-// Create scene
+import * as THREE from "three";
+
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x87ceeb);
+scene.background = new THREE.Color(0x87CEEB);
 
-// Create camera
 const camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
+75,
+window.innerWidth/window.innerHeight,
+0.1,
+1000
 );
 
-camera.position.set(0, 5, 10);
+camera.position.set(0,8,12);
 
-// Create renderer
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({antialias:true});
 
-renderer.setSize(
-    window.innerWidth,
-    window.innerHeight
-);
+renderer.setSize(window.innerWidth,window.innerHeight);
 
 document.body.appendChild(renderer.domElement);
 
+const light = new THREE.DirectionalLight(0xffffff,3);
 
-// Light
-const light = new THREE.DirectionalLight(
-    0xffffff,
-    1
-);
-
-light.position.set(5,10,5);
+light.position.set(30,50,20);
 
 scene.add(light);
 
+const ambient = new THREE.AmbientLight(0xffffff,0.5);
 
-// Create a grass block
-function createBlock(x,y,z){
+scene.add(ambient);
 
-    const geometry =
-        new THREE.BoxGeometry(1,1,1);
+// Create a simple flat world
+const geometry = new THREE.BoxGeometry(1,1,1);
 
-    const material =
-        new THREE.MeshLambertMaterial({
-            color: 0x55aa33
-        });
+const material = new THREE.MeshLambertMaterial({
+color:0x55aa33
+});
 
-    const block =
-        new THREE.Mesh(
+for(let x=-20;x<=20;x++){
+
+    for(let z=-20;z<=20;z++){
+
+        const cube = new THREE.Mesh(
             geometry,
             material
         );
 
-    block.position.set(x,y,z);
+        cube.position.set(x,0,z);
 
-    scene.add(block);
-}
-
-
-// Make ground
-for(let x=-10;x<=10;x++){
-
-    for(let z=-10;z<=10;z++){
-
-        createBlock(x,0,z);
+        scene.add(cube);
 
     }
 
 }
 
-
-// Animation loop
 function animate(){
 
-    requestAnimationFrame(animate);
+requestAnimationFrame(animate);
 
-    renderer.render(
-        scene,
-        camera
-    );
+renderer.render(scene,camera);
 
 }
 
